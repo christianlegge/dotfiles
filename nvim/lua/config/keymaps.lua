@@ -8,7 +8,12 @@ vim.keymap.set("n", "<leader>gi", function()
 	)
 end, { desc = "Lazygit (root dir)" })
 vim.keymap.del("n", "<leader>|")
-vim.keymap.set("n", "<leader>\\", ":vsplit<cr>")
+vim.keymap.set(
+	"n",
+	"<leader>\\",
+	":vsplit<cr>",
+	{ desc = "Split window vertical" }
+)
 vim.keymap.del("n", "<leader><space>")
 vim.keymap.set(
 	{ "n", "v", "i" },
