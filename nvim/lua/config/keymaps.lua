@@ -21,3 +21,9 @@ vim.keymap.set(
 	Util.telescope("files"),
 	{ desc = "Find files" }
 )
+vim.keymap.set(
+	{ "n" },
+	"<leader>cs",
+	":Copilot panel<cr>",
+	{ desc = "Copilot panel" }
+)
