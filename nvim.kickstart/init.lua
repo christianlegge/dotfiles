@@ -130,7 +130,7 @@ require('lazy').setup({
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function() 
+        vim.keymap.set({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then
             return ']c'
           end
@@ -654,11 +654,16 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.tabstop = 4
 vim.o.conceallevel = 0
--- vim.keymap.del('n', '<C-k>')
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.laststatus = 3
+vim.keymap.del('n', '<C-k>')
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window', remap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
+vim.keymap.set('n', '<C-/>', 'gcc', { desc = 'Comment current line', remap = true })
+vim.keymap.set('v', '<C-/>', 'gc', { desc = 'Comment selection', remap = true })
 vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true, desc = 'Toggle Neotree' })
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>', { silent = true, desc = 'Lazy' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true, desc = 'Half page up' })
