@@ -127,6 +127,7 @@ require('lazy').setup({
       },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+        vim.keymap.set('n', '<leader>b', require('gitsigns').toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle git blame' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
@@ -657,7 +658,7 @@ vim.o.conceallevel = 0
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.laststatus = 3
-vim.keymap.del('n', '<C-k>')
+-- vim.keymap.del('n', '<C-k>')
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window', remap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = true })
