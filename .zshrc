@@ -104,7 +104,11 @@ alias vim=nvim
 vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 
 tmuxdefault() {
-	tmux new-session -d -A -s ${USER}
+  if [ -n "$(tmux ls | grep attached)" ]; then
+    tmux new-session
+  else
+    tmux new-session -d -A -s ${USER}
+  fi
 	tmux new-window
 	tmux select-window -t 1
 	tmux -2 attach-session -d
@@ -113,3 +117,7 @@ tmuxdefault() {
 if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
     exec tmuxdefault >/dev/null 2>&1
 fi
+
+# fnm
+export PATH="/home/christian/.local/share/fnm:$PATH"
+eval "`fnm env`"
