@@ -121,3 +121,8 @@ fi
 # fnm
 export PATH="/home/christian/.local/share/fnm:$PATH"
 eval "`fnm env`"
+
+# pnpm
+export PNPM_HOME="/home/christian/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
