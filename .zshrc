@@ -101,6 +101,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
 alias vim=nvim
+alias lg=lazygit
 vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 
 tmuxdefault() {
