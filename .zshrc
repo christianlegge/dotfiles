@@ -127,3 +127,5 @@ eval "`fnm env`"
 export PNPM_HOME="/home/christian/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+fpath=(~/.zfunc $fpath)
