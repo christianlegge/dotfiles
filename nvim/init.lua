@@ -771,17 +771,17 @@ cmp.setup({
 				select = true,
 			}),
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() and has_words_before() then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-			elseif cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() and has_words_before() then
+		-- 		cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+		-- 	elseif cmp.visible() then
+		-- 		cmp.select_next_item()
+		-- 	elseif luasnip.expand_or_locally_jumpable() then
+		-- 		luasnip.expand_or_jump()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
