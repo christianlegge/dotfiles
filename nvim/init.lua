@@ -487,6 +487,12 @@ vim.keymap.set(
 )
 vim.keymap.set(
 	"n",
+	"<leader>sk",
+	require("telescope.builtin").keymaps,
+	{ desc = "[S]earch [K]eymaps" }
+)
+vim.keymap.set(
+	"n",
 	"<leader>sd",
 	require("telescope.builtin").diagnostics,
 	{ desc = "[S]earch [D]iagnostics" }
