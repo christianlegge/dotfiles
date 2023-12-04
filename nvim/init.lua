@@ -96,6 +96,15 @@ require("lazy").setup({
 	},
 
 	{
+		"simrat39/rust-tools.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+	},
+
+	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -270,7 +279,7 @@ require("lazy").setup({
 	--       These are some example plugins that I've included in the kickstart repository.
 	--       Uncomment any of the lines below to enable them.
 	-- require 'kickstart.plugins.autoformat',
-	-- require 'kickstart.plugins.debug',
+	require("kickstart.plugins.debug"),
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -692,7 +701,7 @@ local servers = {
 	-- clangd = {},
 	-- gopls = {},
 	-- pyright = {},
-	rust_analyzer = {},
+	-- rust_analyzer = {},
 	tsserver = {},
 	-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -819,6 +828,49 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 	preselect = cmp.PreselectMode.None,
+})
+
+local rt = require("rust-tools")
+local mason_registry = require("mason-registry")
+
+local this_os = vim.loop.os_uname().sysname
+local codelldb = mason_registry.get_package("codelldb")
+local extension_path = codelldb:get_install_path() .. "/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb"
+liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
+
+rt.setup({
+	dap = {
+		adapter = require("rust-tools.dap").get_codelldb_adapter(
+			codelldb_path,
+			liblldb_path
+		),
+	},
+	server = {
+		capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		on_attach = function(_, bufnr)
+			-- Hover actions
+			vim.keymap.set(
+				"n",
+				"K",
+				rt.hover_actions.hover_actions,
+				{ buffer = bufnr }
+			)
+			-- Code action groups
+			vim.keymap.set(
+				"n",
+				"<Leader>ca",
+				rt.code_action_group.code_action_group,
+				{ buffer = bufnr }
+			)
+		end,
+	},
+	tools = {
+		hover_actions = {
+			auto_focus = true,
+		},
+	},
 })
 
 vim.g.autoformat = true
