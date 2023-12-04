@@ -812,6 +812,7 @@ cmp.setup({
 		{ name = "copilot" },
 		{ name = "luasnip" },
 	},
+	preselect = cmp.PreselectMode.None,
 })
 
 vim.g.autoformat = true
