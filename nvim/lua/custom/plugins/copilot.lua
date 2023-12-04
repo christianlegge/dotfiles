@@ -9,5 +9,8 @@ return {
 				prev = "<C-K>",
 			},
 		},
+		filetypes = {
+			rust = false,
+		},
 	},
 }
