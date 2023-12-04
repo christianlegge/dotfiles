@@ -51,6 +51,12 @@ return {
 		)
 		vim.keymap.set(
 			"n",
+			"<leader>dt",
+			dap.terminate,
+			{ desc = "Debug: Terminate" }
+		)
+		vim.keymap.set(
+			"n",
 			"<leader>di",
 			dap.step_into,
 			{ desc = "Debug: Step Into" }
