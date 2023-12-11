@@ -98,6 +98,7 @@ require("lazy").setup({
 	{
 		"simrat39/rust-tools.nvim",
 		dependencies = {
+			"neovim/nvim-lspconfig",
 			"nvim-lua/plenary.nvim",
 			"mfussenegger/nvim-dap",
 			"rcarriga/nvim-dap-ui",
@@ -612,7 +613,7 @@ local on_attach = function(_, bufnr)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
 
-	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+	nmap("<leader>cr", vim.lsp.buf.rename, "Rename")
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 	nmap(
@@ -679,7 +680,7 @@ require("which-key").register({
 	["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
 	-- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
 	["<leader>h"] = { name = "More git", _ = "which_key_ignore" },
-	["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+	-- ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
 	["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
 	["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 })
@@ -850,6 +851,7 @@ rt.setup({
 	server = {
 		capabilities = require("cmp_nvim_lsp").default_capabilities(),
 		on_attach = function(_, bufnr)
+			on_attach(_, bufnr)
 			-- Hover actions
 			vim.keymap.set(
 				"n",
