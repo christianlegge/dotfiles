@@ -57,6 +57,12 @@ return {
 		)
 		vim.keymap.set(
 			"n",
+			"<leader>dl",
+			dap.run_last,
+			{ desc = "Debug: Run Last" }
+		)
+		vim.keymap.set(
+			"n",
 			"<leader>di",
 			dap.step_into,
 			{ desc = "Debug: Step Into" }
