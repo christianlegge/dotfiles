@@ -355,6 +355,24 @@ vim.keymap.set(
 -- Diagnostic keymaps
 vim.keymap.set(
 	"n",
+	"<leader>cd",
+	vim.diagnostic.open_float,
+	{ desc = "Open floating diagnostic message" }
+)
+vim.keymap.set("n", "[e", function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Go to previous error" })
+vim.keymap.set("n", "]e", function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Go to next error" })
+vim.keymap.set("n", "[w", function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
+end, { desc = "Go to previous warning" })
+vim.keymap.set("n", "]w", function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })
+end, { desc = "Go to next warning" })
+vim.keymap.set(
+	"n",
 	"[d",
 	vim.diagnostic.goto_prev,
 	{ desc = "Go to previous diagnostic message" }
@@ -857,14 +875,14 @@ rt.setup({
 				"n",
 				"K",
 				rt.hover_actions.hover_actions,
-				{ buffer = bufnr }
+				{ buffer = bufnr, desc = "Hover actions" }
 			)
 			-- Code action groups
 			vim.keymap.set(
 				"n",
 				"<Leader>ca",
 				rt.code_action_group.code_action_group,
-				{ buffer = bufnr }
+				{ buffer = bufnr, desc = "Code actions" }
 			)
 		end,
 	},
