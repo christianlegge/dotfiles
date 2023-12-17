@@ -249,6 +249,7 @@ require("lazy").setup({
 			indent = { enable = true },
 			ensure_installed = {
 				"bash",
+				"elixir",
 				"javascript",
 				"json",
 				"lua",

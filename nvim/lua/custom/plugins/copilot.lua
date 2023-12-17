@@ -11,6 +11,7 @@ return {
 		},
 		filetypes = {
 			rust = false,
+			elixir = false,
 		},
 	},
 }
