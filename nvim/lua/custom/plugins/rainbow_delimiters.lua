@@ -1,5 +1,5 @@
 return {
-	"HiPhish/rainbow-delimiters.nvim",
+	"hiphish/rainbow-delimiters.nvim",
 	config = function()
 		local rainbow_delimiters = require("rainbow-delimiters")
 		vim.g.rainbow_delimiters = {
