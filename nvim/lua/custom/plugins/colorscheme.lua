@@ -9,6 +9,7 @@ end
 
 return {
 	{ "sainnhe/gruvbox-material" },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
 		"Mofiqul/dracula.nvim",
 		name = "dracula",
