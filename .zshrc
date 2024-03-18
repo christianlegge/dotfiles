@@ -121,15 +121,34 @@ fi
 
 # fnm
 export PATH="/home/christian/.local/share/fnm:$PATH"
-eval "`fnm env`"
+if [ -z "$TMUX" ]; then
+	eval "$(fnm env --use-on-cd)"
+fi
+# eval "`fnm env`"
 
 # pnpm
 export PNPM_HOME="/home/christian/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
+# go
+export PATH="$PATH:/usr/local/go/bin"
+
 fpath=(~/.zfunc $fpath)
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+alias ll='ls -ahlF'
+
+export WECHALLUSER="scatter"
+export WECHALLTOKEN="REDACTED"
+
+. "/home/christian/.acme.sh/acme.sh.env"
