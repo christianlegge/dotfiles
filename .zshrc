@@ -119,12 +119,14 @@ if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
     exec tmuxdefault >/dev/null 2>&1
 fi
 
+export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
 # fnm
 export PATH="/home/christian/.local/share/fnm:$PATH"
-if [ -z "$TMUX" ]; then
-	eval "$(fnm env --use-on-cd)"
-fi
-# eval "`fnm env`"
+# if [ -z "$TMUX" ]; then
+# 	eval "$(fnm env --multi --use-on-cd)"
+# fi
+eval "$( fnm env )"
+# eval "$(fnm env --multi)"
 
 # pnpm
 export PNPM_HOME="/home/christian/.local/share/pnpm"
