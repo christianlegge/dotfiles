@@ -826,8 +826,8 @@ cmp.setup({
 				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 			elseif cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
+			elseif luasnip.locally_jumpable() then
+				luasnip.jump()
 			else
 				fallback()
 			end
