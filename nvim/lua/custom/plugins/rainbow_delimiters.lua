@@ -11,6 +11,7 @@ return {
 				[""] = "rainbow-delimiters",
 				lua = "rainbow-blocks",
 				javascript = "rainbow-delimiters-react",
+				svelte = "rainbow-delimiters",
 			},
 			highlight = {
 				"RainbowDelimiterRed",

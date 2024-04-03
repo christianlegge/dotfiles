@@ -256,6 +256,7 @@ require("lazy").setup({
 				"tsx",
 				"typescript",
 				"vue",
+				"svelte",
 				"yaml",
 				"rust",
 			},
