@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	lazy = true,
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	keys = {
@@ -38,7 +39,7 @@ return {
 			handlebars = { "prettier" },
 		},
 		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500, lsp_fallback = true },
+		format_on_save = { timeout_ms = 0, lsp_fallback = true },
 		-- Customize formatters
 		formatters = {
 			shfmt = {
