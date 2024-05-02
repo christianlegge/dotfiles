@@ -13,5 +13,11 @@ return {
 			"<CMD>Oil<CR>",
 			desc = "Open parent directory (Oil)",
 		},
+		{
+			"<leader>h",
+			mode = "n",
+			"<CMD>lua require('oil').toggle_hidden()<CR>",
+			desc = "Toggle hidden files (Oil)",
+		},
 	},
 }
