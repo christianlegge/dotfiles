@@ -43,7 +43,7 @@ return {
 			handlebars = { "prettier" },
 		},
 		-- Set up format-on-save
-		format_on_save = {
+		format_after_save = {
 			async = true,
 			timeout_ms = 2500,
 			lsp_fallback = true,

@@ -243,6 +243,7 @@ require("lazy").setup({
 		version = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"ionide/tree-sitter-fsharp",
 		},
 		opts = {
 			highlight = { enable = true },
@@ -259,6 +260,7 @@ require("lazy").setup({
 				"svelte",
 				"yaml",
 				"rust",
+				"fsharp",
 			},
 		},
 		build = ":TSUpdate",
@@ -538,6 +540,17 @@ vim.keymap.set(
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
+	local parser_config =
+		require("nvim-treesitter.parsers").get_parser_configs()
+	parser_config.rascript = {
+		install_info = {
+			url = "~/dev/tree-sitter-rascript", -- local path or git repo
+			files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+			-- optional entries:
+			requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+		},
+		filetype = "rascript", -- if filetype does not match the parser name
+	}
 	require("nvim-treesitter.configs").setup({
 		-- Add languages to be installed here that you want installed for treesitter
 		ensure_installed = {
@@ -693,21 +706,31 @@ local on_attach = function(_, bufnr)
 	end, { desc = "Format current buffer with LSP" })
 end
 
--- document existing key chains
-require("which-key").register({
-	["gs"] = { name = "+surround", _ = "which_key_ignore" },
-	["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-	["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-	-- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-	-- ["<leader>h"] = { name = "More git", _ = "which_key_ignore" },
-	-- ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-	["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-	["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-})
-
+-- -- document existing key chains
+-- require("which-key").register({
+-- 	{ "gs", group = "+surround" },
+-- 	{ "gs_", hidden = true },
+-- 	{ "<leader>c", group = "[C]ode" },
+-- 	{ "<leader>c_", hidden = true },
+-- 	{ "<leader>d", group = "[D]ocument" },
+-- 	{ "<leader>d_", hidden = true },
+-- 	["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
+-- 	["<leader>h"] = { name = "More git", _ = "which_key_ignore" },
+-- 	["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+-- 	{ "<leader>s", group = "[S]earch" },
+-- 	{ "<leader>s_", hidden = true },
+-- 	{ "<leader>w", group = "[W]orkspace" },
+-- 	{ "<leader>w_", hidden = true },
+-- })
+--
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
-require("mason").setup()
+require("mason").setup({
+	registries = {
+		-- "file:~/dev/rascript-languageserver",
+		"github:mason-org/mason-registry",
+	},
+})
 require("mason-lspconfig").setup()
 
 -- Enable the following language servers
@@ -723,7 +746,7 @@ local servers = {
 	-- gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
-	tsserver = {},
+	ts_ls = {},
 	-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
 	lua_ls = {
@@ -759,11 +782,39 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
+require("lspconfig").emmet_language_server.setup({
+	filetypes = { "json" },
+})
+
+vim.filetype.add({ extension = { rascript = "rascript" } })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rascript",
+	callback = function(args)
+		vim.cmd(
+			"set softtabstop=4 tabstop=4 shiftwidth=4 expandtab commentstring=//%s"
+		)
+		-- vim.lsp.start({
+		-- 	name = "my-server-name",
+		-- 	cmd = {
+		-- 		"node",
+		-- 		"/home/christian/dev/rascript-languageserver/out/server.js",
+		-- 		"--stdio",
+		-- 	},
+		-- 	-- Set the "root directory" to the parent directory of the file in the
+		-- 	-- current buffer (`args.buf`) that contains either a "setup.py" or a
+		-- 	-- "pyproject.toml" file. Files that share a root directory will reuse
+		-- 	-- the connection to the same LSP server.
+		-- 	-- root_dir = vim.fs.root(args.buf, { "setup.py", "pyproject.toml" }),
+		-- })
+	end,
+})
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
 		return false
@@ -845,7 +896,6 @@ cmp.setup({
 	}),
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "copilot" },
 		{ name = "luasnip" },
 	},
 	preselect = cmp.PreselectMode.None,
@@ -1023,11 +1073,6 @@ vim.keymap.set(
 	":split<cr>",
 	{ desc = "Split window horizontal" }
 )
-vim.keymap.set(
-	{ "n" },
-	"<leader>cs",
-	":Copilot panel<cr>",
-	{ desc = "Copilot panel" }
-)
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
