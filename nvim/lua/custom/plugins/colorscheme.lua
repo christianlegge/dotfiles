@@ -2,7 +2,7 @@ local flashLabelColors = {
 	bg = "#ffdddd",
 	fg = "#000000",
 }
-local scheme = "gruvbox-material"
+local scheme = "rose-pine"
 local initScheme = function()
 	vim.cmd.colorscheme(scheme)
 end
