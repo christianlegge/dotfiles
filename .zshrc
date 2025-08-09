@@ -136,6 +136,9 @@ export PATH="$PNPM_HOME:$PATH"
 # go
 export PATH="$PATH:/usr/local/go/bin"
 
+# neovim
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 fpath=(~/.zfunc $fpath)
 
 # tabtab source for packages
@@ -152,5 +155,7 @@ alias ll='ls -ahlF'
 
 export WECHALLUSER="scatter"
 export WECHALLTOKEN="REDACTED"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 . "/home/christian/.acme.sh/acme.sh.env"
