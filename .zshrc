@@ -107,16 +107,20 @@ vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 tmuxdefault() {
   if [ -n "$(tmux ls | grep attached)" ]; then
     tmux new-session
+	tmux source-file ~/.tmux.conf
   else
     tmux new-session -d -A -s ${USER}
+	tmux source-file ~/.tmux.conf
   fi
 	tmux new-window
 	tmux select-window -t 1
 	tmux -2 attach-session -d
+	tmux source-file ~/.tmux.conf
 }
 
 if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
     exec tmuxdefault >/dev/null 2>&1
+	tmux source-file ~/.tmux.conf
 fi
 
 export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
