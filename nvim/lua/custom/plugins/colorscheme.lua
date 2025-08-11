@@ -8,41 +8,51 @@ local initScheme = function()
 end
 
 return {
-	{ "sainnhe/gruvbox-material" },
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{
-		"Mofiqul/dracula.nvim",
-		name = "dracula",
-		init = initScheme,
-
-		opts = { overrides = { FlashLabel = flashLabelColors } },
-	},
-	{
-		"Shatur/neovim-ayu",
-		name = "ayu",
-		init = initScheme,
-		opts = { overrides = { FlashLabel = flashLabelColors } },
-	},
+	-- { "sainnhe/gruvbox-material" },
+	-- { "catppuccin/nvim", name = "catppuccin" },
+	-- {
+	-- 	"Mofiqul/dracula.nvim",
+	-- 	name = "dracula",
+	-- 	init = initScheme,
+	--
+	-- 	opts = { overrides = { FlashLabel = flashLabelColors } },
+	-- },
+	-- {
+	-- 	"Shatur/neovim-ayu",
+	-- 	name = "ayu",
+	-- 	init = initScheme,
+	-- 	opts = { overrides = { FlashLabel = flashLabelColors } },
+	-- },
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		priority = 1000,
 		init = initScheme,
+		lazy = false,
 		opts = {
 			highlight_groups = {
 				FlashLabel = flashLabelColors,
 			},
+			styles = { transparency = true },
+			dim_inactive_windows = true,
+			palette = {
+				overlay = "#000000",
+			},
+			enable = {
+				terminal = false,
+			},
 		},
 	},
-	{
-		"folke/tokyonight.nvim",
-		init = initScheme,
-		opts = {
-			style = "night",
-			on_highlights = function(hl, c)
-				hl.FlashLabel = flashLabelColors
-			end,
-		},
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	init = initScheme,
+	-- 	opts = {
+	-- 		style = "night",
+	-- 		on_highlights = function(hl, c)
+	-- 			hl.FlashLabel = flashLabelColors
+	-- 		end,
+	-- 	},
+	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = {
