@@ -123,18 +123,12 @@ if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
 	tmux source-file ~/.tmux.conf
 fi
 
-export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
-# fnm
-export PATH="/home/christian/.local/share/fnm:$PATH"
-# if [ -z "$TMUX" ]; then
-# 	eval "$(fnm env --multi --use-on-cd)"
-# fi
-eval "$( fnm env )"
-# eval "$(fnm env --multi)"
-
 # pnpm
 export PNPM_HOME="/home/christian/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
 
 # go
@@ -149,9 +143,9 @@ fpath=(~/.zfunc $fpath)
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
-. "$HOME/.asdf/asdf.sh"
+# . "$HOME/.asdf/asdf.sh"
 # append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+# fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
@@ -163,3 +157,10 @@ export WECHALLTOKEN="REDACTED"
 export PATH="$HOME/.local/bin:$PATH"
 
 . "/home/christian/.acme.sh/acme.sh.env"
+
+# fnm
+FNM_PATH="/home/christian/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
