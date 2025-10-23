@@ -6,12 +6,13 @@ while true; do
 	p=$( ps aux | grep "[s]waybg" )
 	if [ $night -eq 0 ]; then
 		if echo $p | grep -q "daybg"; then
-			exit
+			continue
 		fi
 		killall swaybg; swaybg -o \* -i /home/christian/Pictures/daybg.jpg -m fill &
 	else
+		echo "Night"
 		if echo $p | grep -q "nightbg"; then
-			exit
+			continue
 		fi
 		killall swaybg; swaybg -o \* -i /home/christian/Pictures/nightbg.jpg -m fill &
 	fi
