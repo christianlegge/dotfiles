@@ -31,14 +31,14 @@
         //"custom/gammastep"
     ],
     "modules-right": [
-        "backlight",
+        //"backlight",
         "custom/storage",
         "memory",
         "cpu",
-        "battery",
-        //"pulseaudio",
-        "wireplumber",
-        "custom/screenshot_t",
+        //"battery",
+        "pulseaudio",
+        //"wireplumber",
+        //"custom/screenshot_t",
         "tray",
         "custom/power"
     ],
@@ -323,7 +323,7 @@
         "separate-outputs": true
     },
 
-    "pulseaudio": {
+    "pulseaudio-bak": {
         "scroll-step": 3, // %, can be a float
         "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
@@ -346,13 +346,15 @@
         "on-click-right": "amixer sset Master toggle"
     },
 
-    "wireplumber": {
+	// prev "wireplumber"
+    "pulseaudio": {
         "on-click": "pavucontrol",
-        "on-click-right": "amixer sset Master toggle 1>/dev/null",
+		//"on-click-right": "amixer sset Master toggle 1>/dev/null",
+		"on-click-right": "/home/christian/.config/waybar/toggle_audio.sh",
         //on-click: "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
         //on-scroll-down: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04+";
         //on-scroll-up: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04-";
-        "format": "<span foreground='#fab387'>{icon}</span>  {volume}%",
+        "format": "<span><span foreground='#fab387'>{icon}</span>  <span foreground='#ffffff'>{volume}%</span></span>",
         "format-muted": " ",
         "format-source": "",
         "format-source-muted": "",
@@ -365,7 +367,8 @@
             "phone": " ",
             "portable": " ",
             "car": " ",
-            "default": [" ", " ", " "]
+			"alsa_output.pci-0000_01_00.1.hdmi-stereo": "🖥️ ",
+            "default": [" ", " ", " "],
         },
     },
 
