@@ -64,9 +64,9 @@
 		},
 		"on-click": "waybar_timer new 'notify-send \"Session finished\"'",
 		"on-click-middle": "waybar_timer cancel",
-		"on-click-right": "waybar_timer togglepause",
-		"on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
-		"on-scroll-down": "waybar_timer decrease 60"
+		"on-click-right": "waybar_timer skip"
+		//"on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
+		//"on-scroll-down": "waybar_timer decrease 60"
 	},
 
     "custom/sp1": {
