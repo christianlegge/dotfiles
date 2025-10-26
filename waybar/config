@@ -19,7 +19,7 @@
         //"custom/rofi",
         "hyprland/workspaces",
         //"hyprland/submap",
-        "temperature",
+        //"temperature",
 		"custom/timer",
         //"idle_inhibitor",
         //"mpd"
