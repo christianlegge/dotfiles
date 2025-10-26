@@ -2,7 +2,7 @@
 
 while true; do
 	elev=$( heliocron -l 43.5789 -o -79.6583 poll --json | jq -r ".solar_elevation" )
-	night=$( echo "$elev < 0" | bc )
+	night=$( echo "$elev < -6" | bc )
 	p=$( ps aux | grep "[s]waybg" )
 	if [ $night -eq 0 ]; then
 		if echo $p | grep -q "daybg"; then
