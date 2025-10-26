@@ -20,6 +20,7 @@
         "hyprland/workspaces",
         //"hyprland/submap",
         "temperature",
+		"custom/timer",
         //"idle_inhibitor",
         //"mpd"
         "custom/spotify"
@@ -47,6 +48,26 @@
     // -------------------------------------------------------------------------
     // Modules
     // -------------------------------------------------------------------------
+
+	"custom/timer": {
+		"exec": "waybar_timer hook",
+		"exec-on-event": false,
+		"return-type": "json",
+		"format": "{icon}",
+		"format-icons": {
+			"running-focus": "Focusing...",
+			"running-break": "On a break...",
+			"paused-focus": "Paused focus",
+			"paused-break": "Paused break",
+			"standby-focus": "Click to focus",
+			"standby-break": "Click to break"
+		},
+		"on-click": "waybar_timer new 'notify-send \"Session finished\"'",
+		"on-click-middle": "waybar_timer cancel",
+		"on-click-right": "waybar_timer togglepause",
+		"on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
+		"on-scroll-down": "waybar_timer decrease 60"
+	},
 
     "custom/sp1": {
         "format": " | ",
@@ -180,7 +201,7 @@
         "interval": 3600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
+        "on-click": "alacritty -e 'paru'; pkill -x -SIGRTMIN+8 waybar", // update system
         "signal": 8,
         "max-length": 5,
         "min-length": 3
