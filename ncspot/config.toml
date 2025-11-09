@@ -1,0 +1,7 @@
+[keybindings]
+"Ctrl+d" = "move down 20"
+"Ctrl+u" = "move up 20"
+"g" = "move top"
+"Shift+g" = "move bottom"
+"d" = "noop"
+"Shift+d" = "delete"
