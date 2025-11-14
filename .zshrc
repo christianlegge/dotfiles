@@ -134,6 +134,9 @@ esac
 # go
 export PATH="$PATH:/usr/local/go/bin"
 
+# cargo bin
+export PATH="$PATH:/home/christian/.cargo/bin"
+
 # neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
