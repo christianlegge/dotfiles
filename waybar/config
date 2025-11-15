@@ -208,12 +208,12 @@
     },
 
 "custom/spotify": {
-    "exec": "~/.config/waybar/mediaplayer.py --player ncspot",
+    "exec": "~/.config/waybar/mediaplayer.py --ignore firefox",
     "format": "🎶 {}",
     "return-type": "json",
-    "on-click": "playerctl play-pause -p ncspot",
-    "on-scroll-up": "playerctl next -p ncspot",
-    "on-scroll-down": "playerctl previous -p ncspot"
+    "on-click": "playerctl play-pause -i firefox",
+    "on-scroll-up": "playerctl next -i firefox",
+    "on-scroll-down": "playerctl previous -i firefox",
 },
 
     "custom/media": {

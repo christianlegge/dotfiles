@@ -84,6 +84,7 @@ def parse_arguments():
 
     # Define for which player we're listening
     parser.add_argument('--player')
+    parser.add_argument('--ignore')
 
     return parser.parse_args()
 
@@ -112,6 +113,11 @@ def main():
     signal.signal(signal.SIGTERM, signal_handler)
 
     for player in manager.props.player_names:
+        if arguments.ignore is not None and arguments.ignore == player.name:
+            logger.debug('{player} is the ignore player, skipping it'
+                         .format(player=player.name)
+                         )
+            continue
         if arguments.player is not None and arguments.player != player.name:
             logger.debug('{player} is not the filtered player, skipping it'
                          .format(player=player.name)
