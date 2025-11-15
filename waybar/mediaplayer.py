@@ -46,7 +46,10 @@ def on_metadata(player, metadata, manager):
     write_output(track_info, player)
 
 
-def on_player_appeared(manager, player, selected_player=None):
+def on_player_appeared(manager, player, selected_player=None, ignored_player=None):
+    if player is not None and ignored_player is not None and ignored_player in player.name:
+        logger.debug("New player appeared, but it's the ignored player, skipping")
+        return
     if player is not None and (selected_player is None or player.name == selected_player):
         init_player(manager, player)
     else:
@@ -106,15 +109,15 @@ def main():
     manager = Playerctl.PlayerManager()
     loop = GLib.MainLoop()
 
-    manager.connect('name-appeared', lambda *args: on_player_appeared(*args, arguments.player))
+    manager.connect('name-appeared', lambda *args: on_player_appeared(*args, arguments.player, arguments.ignore))
     manager.connect('player-vanished', on_player_vanished)
 
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
     for player in manager.props.player_names:
-        if arguments.ignore is not None and arguments.ignore == player.name:
-            logger.debug('{player} is the ignore player, skipping it'
+        if arguments.ignore is not None and arguments.ignore in player.name:
+            logger.debug('{player} is the ignored player, skipping it'
                          .format(player=player.name)
                          )
             continue
