@@ -73,38 +73,6 @@ require("lazy").setup({
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
-	-- Detect tabstop and shiftwidth automatically
-	-- "tpope/vim-sleuth",
-
-	-- NOTE: This is where your plugins related to LSP can be installed.
-	--  The configuration is done below. Search for lspconfig to find it below.
-	{
-		-- LSP Configuration & Plugins
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			"mason-org/mason.nvim",
-			"mason-org/mason-lspconfig.nvim",
-
-			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			"folke/neodev.nvim",
-		},
-	},
-
-	-- {
-	--   "simrat39/rust-tools.nvim",
-	--   dependencies = {
-	--     "neovim/nvim-lspconfig",
-	--     "nvim-lua/plenary.nvim",
-	--     "mfussenegger/nvim-dap",
-	--     "rcarriga/nvim-dap-ui",
-	--   },
-	-- },
-
 	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
@@ -634,6 +602,8 @@ end, 0)
 local on_attach = function(buf_info)
 	local bufnr = buf_info.buf
 
+	vim.lsp.inlay_hint.enable(true)
+
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
 	-- many times.
@@ -726,9 +696,6 @@ end
 -- })
 --
 
--- Setup neovim lua configuration
-require("neodev").setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -736,28 +703,6 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = on_attach,
 })
-
--- -- Ensure the servers above are installed
--- local mason_lspconfig = require("mason-lspconfig")
---
--- mason_lspconfig.setup({
--- 	ensure_installed = vim.tbl_keys(servers),
--- })
---
--- mason_lspconfig.setup_handlers({
--- 	function(server_name)
--- 		require("lspconfig")[server_name].setup({
--- 			capabilities = capabilities,
--- 			on_attach = on_attach,
--- 			settings = servers[server_name],
--- 			filetypes = (servers[server_name] or {}).filetypes,
--- 		})
--- 	end,
--- })
-
--- vim.lsp.config.emmet_language_server.setup({
--- 	filetypes = { "json" },
--- })
 
 vim.filetype.add({ extension = { rascript = "rascript" } })
 vim.filetype.add({ extension = { [".blade.php"] = "php" } })
@@ -1049,6 +994,11 @@ vim.keymap.set(
 )
 
 vim.lsp.config("rust_analyzer", {
+	on_attach = function()
+		vim.defer_fn(function()
+			vim.lsp.inlay_hint.enable(true)
+		end, 5000)
+	end,
 	settings = {
 		["rust-analyzer"] = {
 			check = {
