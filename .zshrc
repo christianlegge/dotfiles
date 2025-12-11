@@ -112,8 +112,8 @@ tmuxdefault() {
     tmux new-session -d -A -s ${USER}
 	tmux source-file ~/.tmux.conf
   fi
-	tmux new-window
-	tmux select-window -t 1
+	# tmux new-window
+	# tmux select-window -t 1
 	tmux -2 attach-session -d
 	tmux source-file ~/.tmux.conf
 }
