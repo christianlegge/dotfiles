@@ -1,0 +1,58 @@
+* {
+  font-family: "Fira Code", monospace;
+  font-size: 1.25rem;
+}
+
+window {
+  background-color: #007d6f; /* cachydgreen */
+}
+
+#input {
+  margin: 5px;
+  border-radius: 0px;
+  border: none;
+  background-color: #111826; /* cachydgreen */
+  color: #ffffffff; /* cachywhite */
+}
+
+#inner-box {
+  background-color: #111826; /* cachydblue */
+}
+
+#outer-box {
+  margin: 2px;
+  padding: 10px;
+  background-color: #111826; /* cachydblue */
+}
+
+#scroll {
+  margin: 5px;
+}
+
+#text {
+  padding: 4px;
+  color: #ffffffff; /* cachywhite */
+}
+
+#entry {
+  padding: 10px 6px;
+  border-radius: 12px;
+  margin: 4px 0px;
+  background-color: #182036;
+}
+
+#entry #img {
+  margin: 0px 6px;
+}
+
+#entry:nth-child(even) {
+  background-color: #182545; /* cachymblue */
+}
+
+#entry:selected {
+  background: linear-gradient(#40eac4, #008a64);
+}
+
+#text:selected {
+  background: transparent;
+}

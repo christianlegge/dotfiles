@@ -1,0 +1,6 @@
+allow_images=true
+no_actions=true
+term=kitty
+insensitive=true
+matching=fuzzy
+mode=drun
