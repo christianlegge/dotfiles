@@ -4,15 +4,15 @@
 }
 
 window {
-  background-color: #007d6f; /* cachydgreen */
+  background-color: transparent;
 }
 
 #input {
   margin: 5px;
-  border-radius: 0px;
+  border-radius: 8px;
   border: none;
   background-color: #111826; /* cachydgreen */
-  color: #ffffffff; /* cachywhite */
+  color: #ffffff; /* cachywhite */
 }
 
 #inner-box {
@@ -23,6 +23,8 @@ window {
   margin: 2px;
   padding: 10px;
   background-color: #111826; /* cachydblue */
+  border-radius: 12px;
+  border: 2px solid #007d6f;
 }
 
 #scroll {
@@ -39,6 +41,7 @@ window {
   border-radius: 12px;
   margin: 4px 0px;
   background-color: #182036;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 #entry #img {
@@ -51,6 +54,7 @@ window {
 
 #entry:selected {
   background: linear-gradient(#40eac4, #008a64);
+  color: white;
 }
 
 #text:selected {
