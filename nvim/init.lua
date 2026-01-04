@@ -882,6 +882,8 @@ vim.o.splitright = true
 vim.o.laststatus = 3
 vim.o.wrap = true
 vim.o.linebreak = true
+vim.o.spell = false
+vim.o.spelloptions = "camel"
 
 -- Move Lines
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -1018,6 +1020,21 @@ vim.lsp.config("lua_ls", {
 			},
 		},
 	},
+})
+
+local spell_types = { "text", "markdown", "gitcommit", "plaintex", "typst" }
+
+-- Create an augroup for spellcheck to group related autocommands
+vim.api.nvim_create_augroup("Spellcheck", { clear = true })
+
+-- Create an autocommand to enable spellcheck for specified file types
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = "Spellcheck", -- Grouping the command for easier management
+	pattern = spell_types, -- Only apply to these file types
+	callback = function()
+		vim.opt_local.spell = true -- Enable spellcheck for these file types
+	end,
+	desc = "Enable spellcheck for defined filetypes", -- Description for clarity
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
