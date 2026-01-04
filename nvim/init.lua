@@ -211,7 +211,7 @@ require("lazy").setup({
 		version = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"ionide/tree-sitter-fsharp",
+			-- "ionide/tree-sitter-fsharp",
 		},
 		opts = {
 			highlight = { enable = true },
@@ -228,7 +228,7 @@ require("lazy").setup({
 				"svelte",
 				"yaml",
 				"rust",
-				"fsharp",
+				-- "fsharp",
 			},
 		},
 		build = ":TSUpdate",
@@ -880,6 +880,8 @@ vim.o.conceallevel = 0
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.laststatus = 3
+vim.o.wrap = true
+vim.o.linebreak = true
 
 -- Move Lines
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
