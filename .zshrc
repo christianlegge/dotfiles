@@ -102,7 +102,7 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 alias vim=nvim
 alias lg=lazygit
-alias mv=mv -i
+alias mv='mv -i'
 vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 
 tmuxdefault() {
