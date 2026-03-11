@@ -103,6 +103,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 alias vim=nvim
 alias lg=lazygit
 alias mv='mv -i'
+alias sudo='sudo '
 vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 
 tmuxdefault() {
@@ -168,3 +169,6 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
 fi
+
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
