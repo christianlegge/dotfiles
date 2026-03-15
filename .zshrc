@@ -142,6 +142,9 @@ export PATH="$PATH:/home/christian/.cargo/bin"
 # neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
+export ANDROID_HOME=~/Android/Sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+
 fpath=(~/.zfunc $fpath)
 
 # tabtab source for packages
@@ -170,5 +173,5 @@ if [ -d "$FNM_PATH" ]; then
   eval "`fnm env`"
 fi
 
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
