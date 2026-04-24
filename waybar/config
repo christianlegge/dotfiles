@@ -23,6 +23,7 @@
 		"custom/timer",
         //"idle_inhibitor",
         //"mpd"
+		"custom/jellyfin",
         "custom/spotify"
     ],
     "modules-center": [
@@ -77,6 +78,15 @@
         "format": " |",
         "tooltip": false
     },
+
+	"custom/jellyfin": {
+		"return-type": "json",
+		"exec": "~/.config/waybar/modules/jellyfin.sh",
+		"interval": 10,
+		"format": " {} ",
+		"on-click": "shutdown +120",
+		"on-click-right": "shutdown -c"
+	},
 
 
     "custom/rofi": {

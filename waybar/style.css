@@ -140,6 +140,18 @@ window#waybar.hidden {
   padding: 6px;
 }
 
+#custom-jellyfin {
+  background-color: #111827;
+  border-radius: 14px;
+  padding: 6px;
+}
+
+#custom-jellyfin.red {
+  background-color: #dd1010;
+  border-radius: 14px;
+  padding: 6px;
+}
+
 #custom-storage {
   background-color: #111827;
   border-radius: 14px;
