@@ -208,15 +208,14 @@ require("lazy").setup({
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		version = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			-- "ionide/tree-sitter-fsharp",
 		},
-		opts = {
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
+		init = function()
+			local ensureInstalled = {
 				"bash",
 				"elixir",
 				"javascript",
@@ -228,10 +227,24 @@ require("lazy").setup({
 				"svelte",
 				"yaml",
 				"rust",
+				"xml",
 				-- "fsharp",
-			},
+			}
+			local alreadyInstalled =
+				require("nvim-treesitter.config").get_installed()
+			local parsersToInstall = vim.iter(ensureInstalled)
+				:filter(function(parser)
+					return not vim.tbl_contains(alreadyInstalled, parser)
+				end)
+				:totable()
+			require("nvim-treesitter").install(parsersToInstall)
+		end,
+		opts = {
+			highlight = { enable = true },
+			indent = { enable = true },
 		},
 		build = ":TSUpdate",
+		main = "nvim-treesitter",
 		config = function(_, opts)
 			if type(opts.ensure_installed) == "table" then
 				---@type table<string, boolean>
@@ -244,7 +257,6 @@ require("lazy").setup({
 					return true
 				end, opts.ensure_installed)
 			end
-			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
 
@@ -507,95 +519,96 @@ vim.keymap.set(
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
-vim.defer_fn(function()
-	local parser_config =
-		require("nvim-treesitter.parsers").get_parser_configs()
-	parser_config.rascript = {
-		install_info = {
-			url = "~/dev/tree-sitter-rascript", -- local path or git repo
-			files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
-			-- optional entries:
-			requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-		},
-		filetype = "rascript", -- if filetype does not match the parser name
-	}
-	require("nvim-treesitter.configs").setup({
-		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = {
-			"c",
-			"cpp",
-			"go",
-			"lua",
-			"python",
-			"rust",
-			"tsx",
-			"javascript",
-			"typescript",
-			"vimdoc",
-			"vim",
-			"bash",
-		},
-
-		-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-		auto_install = false,
-
-		highlight = { enable = true },
-		indent = { enable = true },
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "<c-space>",
-				node_incremental = "<c-space>",
-				scope_incremental = "<c-s>",
-				node_decremental = "<M-space>",
-			},
-		},
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-				keymaps = {
-					-- You can use the capture groups defined in textobjects.scm
-					["aa"] = "@parameter.outer",
-					["ia"] = "@parameter.inner",
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
-				},
-			},
-			move = {
-				enable = true,
-				set_jumps = true, -- whether to set jumps in the jumplist
-				goto_next_start = {
-					["]m"] = "@function.outer",
-					["]]"] = "@class.outer",
-				},
-				goto_next_end = {
-					["]M"] = "@function.outer",
-					["]["] = "@class.outer",
-				},
-				goto_previous_start = {
-					["[m"] = "@function.outer",
-					["[["] = "@class.outer",
-				},
-				goto_previous_end = {
-					["[M"] = "@function.outer",
-					["[]"] = "@class.outer",
-				},
-			},
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>a"] = "@parameter.inner",
-				},
-				swap_previous = {
-					["<leader>A"] = "@parameter.inner",
-				},
-			},
-		},
-	})
-end, 0)
+-- vim.defer_fn(function()
+-- 	local parser_config =
+-- 		require("nvim-treesitter.parsers").get_parser_configs()
+-- 	parser_config.rascript = {
+-- 		install_info = {
+-- 			url = "~/dev/tree-sitter-rascript", -- local path or git repo
+-- 			files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+-- 			-- optional entries:
+-- 			requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+-- 		},
+-- 		filetype = "rascript", -- if filetype does not match the parser name
+-- 	}
+-- 	require("nvim-treesitter.configs").setup({
+-- 		-- Add languages to be installed here that you want installed for treesitter
+-- 		ensure_installed = {
+-- 			"c",
+-- 			"cpp",
+-- 			"go",
+-- 			"lua",
+-- 			"python",
+-- 			"rust",
+-- 			"tsx",
+-- 			"javascript",
+-- 			"typescript",
+-- 			"vimdoc",
+-- 			"vim",
+-- 			"xml",
+-- 			"bash",
+-- 		},
+--
+-- 		-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+-- 		auto_install = false,
+--
+-- 		highlight = { enable = true },
+-- 		indent = { enable = true },
+-- 		incremental_selection = {
+-- 			enable = true,
+-- 			keymaps = {
+-- 				init_selection = "<c-space>",
+-- 				node_incremental = "<c-space>",
+-- 				scope_incremental = "<c-s>",
+-- 				node_decremental = "<M-space>",
+-- 			},
+-- 		},
+-- 		textobjects = {
+-- 			select = {
+-- 				enable = true,
+-- 				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+-- 				keymaps = {
+-- 					-- You can use the capture groups defined in textobjects.scm
+-- 					["aa"] = "@parameter.outer",
+-- 					["ia"] = "@parameter.inner",
+-- 					["af"] = "@function.outer",
+-- 					["if"] = "@function.inner",
+-- 					["ac"] = "@class.outer",
+-- 					["ic"] = "@class.inner",
+-- 				},
+-- 			},
+-- 			move = {
+-- 				enable = true,
+-- 				set_jumps = true, -- whether to set jumps in the jumplist
+-- 				goto_next_start = {
+-- 					["]m"] = "@function.outer",
+-- 					["]]"] = "@class.outer",
+-- 				},
+-- 				goto_next_end = {
+-- 					["]M"] = "@function.outer",
+-- 					["]["] = "@class.outer",
+-- 				},
+-- 				goto_previous_start = {
+-- 					["[m"] = "@function.outer",
+-- 					["[["] = "@class.outer",
+-- 				},
+-- 				goto_previous_end = {
+-- 					["[M"] = "@function.outer",
+-- 					["[]"] = "@class.outer",
+-- 				},
+-- 			},
+-- 			swap = {
+-- 				enable = true,
+-- 				swap_next = {
+-- 					["<leader>a"] = "@parameter.inner",
+-- 				},
+-- 				swap_previous = {
+-- 					["<leader>A"] = "@parameter.inner",
+-- 				},
+-- 			},
+-- 		},
+-- 	})
+-- end, 0)
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -745,7 +758,9 @@ local has_words_before = function()
 				:match("^%s*$")
 			== nil
 end
-luasnip.config.setup({})
+luasnip.config.setup({
+	build = "make install_jsregexp",
+})
 
 ---@diagnostic disable-next-line missing-fields
 cmp.setup({
@@ -1021,6 +1036,50 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
+
+local vue_language_server_path = vim.fn.stdpath("data")
+	.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
+local tsserver_filetypes = {
+	"typescript",
+	"javascript",
+	"javascriptreact",
+	"typescriptreact",
+	"vue",
+}
+
+local vue_plugin = {
+	name = "@vue/typescript-plugin",
+	location = vue_language_server_path,
+	languages = { "vue" },
+	configNamespace = "typescript",
+}
+
+local vtsls_config = {
+	settings = {
+		vtsls = {
+			tsserver = {
+				globalPlugins = {
+					vue_plugin,
+				},
+			},
+		},
+	},
+	filetypes = tsserver_filetypes,
+}
+
+local ts_ls_config = {
+	init_options = {
+		plugins = {
+			vue_plugin,
+		},
+	},
+	filetypes = tsserver_filetypes,
+}
+
+vim.lsp.config("vtsls", vtsls_config)
+
+vim.lsp.config("ts_ls", ts_ls_config)
 
 local spell_types = { "text", "markdown", "gitcommit", "plaintex", "typst" }
 

@@ -3,7 +3,7 @@ return {
 	lazy = false,
 	opts = {
 		default_file_explorer = true,
-		keymaps = { ["<C-p>"] = false },
+		keymaps = { ["<C-p>"] = false, ["<leader>p"] = "actions.preview" },
 	},
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = {
