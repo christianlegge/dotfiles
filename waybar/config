@@ -330,7 +330,7 @@
 
     "hyprland/workspaces": {
         "all-outputs": true,
-        "format": "{name}",
+        "format": "{icon}",
         "format-icons": {
             "1": "一",
             "2": "二",
@@ -346,7 +346,7 @@
         // "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
         // "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
         "sort-by-number": true,
-        "active-only": false,
+        "active-only": true,
     },
 
     "hyprland/window": {
