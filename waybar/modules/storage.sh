@@ -48,4 +48,10 @@ END {
 '
 }
 
-echo "{\"text\": \"$( freespace "/" ) | $( freespace "/c" ) | $( freespace "/d" ) | $( freespace "/e" )\", \"alt\": \"$( percentage "/" )% | $( percentage "/c" )% | $( percentage "/d" )% | $( percentage "/e" )%\"}"
+btrfs_free() {
+	btrfs fi us / | grep "Device unallocated:" | awk '
+	{ split($3,a,"."); print a[1] substr($3, length($3)-2, 1) }
+'
+}
+
+echo "{\"text\": \"$( btrfs_free ) | $( freespace "/c" ) | $( freespace "/d" ) | $( freespace "/e" )\", \"alt\": \"$( percentage "/" )% | $( percentage "/c" )% | $( percentage "/d" )% | $( percentage "/e" )%\"}"

@@ -1,9 +1,9 @@
 * {
   font-family:
-    "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica,
+    "Adwaita Sans", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica,
     Arial, sans-serif;
-  font-size: 14px; /* Slightly smaller font size */
-  font-weight: 900;
+  font-size: 13px; /* Slightly smaller font size */
+  font-weight: 500;
   margin: 0;
   padding: 0;
   transition-property: background-color;
