@@ -383,8 +383,8 @@
 		//"on-click-right": "amixer sset Master toggle 1>/dev/null",
 		"on-click-right": "/home/christian/.config/waybar/toggle_audio.sh",
         //on-click: "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-        //on-scroll-down: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04+";
-        //on-scroll-up: "${wpctl} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.04-";
+        "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 0.02+",
+        "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 0.02-",
         "format": "<span><span foreground='#fab387'>{icon}</span>  <span foreground='#ffffff'>{volume}%</span></span>",
         "format-muted": " ",
         "format-source": "",
