@@ -1,0 +1,101 @@
+-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+-- ┃                    Variables Configuration                  ┃
+-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+require("config.colors")
+
+hl.config({
+	-- https://wiki.hyprland.org/Configuring/Variables/#general
+	general = {
+		gaps_in = 3,
+		gaps_out = 5,
+		border_size = 3,
+		col = {
+			active_border = LGREEN,
+			inactive_border = MBLUE,
+		},
+		layout = "dwindle", -- master|dwindle
+
+		-- https://wiki.hyprland.org/Configuring/Variables/#snap
+		snap = {
+			enabled = true,
+		},
+	},
+
+	-- removed old gestures {} block — Hyprland 0.39+ uses gesture = … lines
+
+	-- https://wiki.hyprland.org/Configuring/Variables/#group
+	group = {
+		col = {
+			border_active = DGREEN,
+			border_inactive = LGREEN,
+			border_locked_active = MGREEN,
+			border_locked_inactive = DBLUE,
+		},
+
+		-- https://wiki.hyprland.org/Configuring/Variables/#groupbar
+		groupbar = {
+			font_family = "Fira Sans",
+			text_color = DBLUE,
+			col = {
+				active = DGREEN,
+				inactive = LGREEN,
+				locked_active = MGREEN,
+				locked_inactive = DBLUE,
+			},
+		},
+	},
+
+	-- https://wiki.hyprland.org/Configuring/Variables/#misc
+	misc = {
+		font_family = "Fira Sans",
+		splash_font_family = "Fira Sans",
+		disable_hyprland_logo = true,
+		col = {
+			splash = LGREEN,
+		},
+		background_color = DBLUE,
+		enable_swallow = true,
+		swallow_regex = "^(nautilus|nemo|thunar|btrfs-assistant.)$",
+		focus_on_activate = true,
+		vrr = 2,
+		middle_click_paste = false,
+	},
+
+	-- https://wiki.hyprland.org/Configuring/Variables/#render
+	render = {
+		direct_scanout = true,
+	},
+
+	-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+	dwindle = {
+		special_scale_factor = 0.8,
+		preserve_split = true,
+	},
+
+	-- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+	master = {
+		new_status = "master",
+		special_scale_factor = 0.8,
+	},
+
+	cursor = {
+		no_warps = true,
+	},
+})
+
+-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+-- ┃                    Gestures                                 ┃
+-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+-- 4-finger horizontal swipe to switch workspaces
+-- gesture = 4, horizontal, workspace
+
+-- 3-finger swipe down closes active window
+-- gesture = 3, down, close
+
+-- 3-finger swipe up toggles fullscreen
+-- gesture = 3, up, fullscreen
+
+-- 3-finger swipe left toggles float/tile
+-- gesture = 3, left, float

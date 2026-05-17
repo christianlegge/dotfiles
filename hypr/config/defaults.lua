@@ -1,0 +1,7 @@
+FILEMANAGER = "nautilus"
+APPLAUNCHER = "walker"
+TERMINAL = "kitty"
+IDLEHANDLER = "swayidle -w timeout 300 'swaylock -f -c 000000' before-sleep 'swaylock -f -c 000000'"
+SHOT_REGION = "grimblast copy area"
+SHOT_WINDOW = "grimblast copy active"
+SHOT_SCREEN = "grimblast copy output"
