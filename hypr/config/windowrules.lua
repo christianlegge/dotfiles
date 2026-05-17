@@ -5,25 +5,25 @@
 -- Windows Rules https://wiki.hyprland.org/Configuring/Window-Rules/ #
 
 -- Float Necessary Windows
-hl.window_rule = { match = { class = "^(org.pulseaudio.pavucontrol)" }, float = true }
-hl.window_rule = { match = { class = "^()$", title = "^(Picture in picture)$" }, float = true }
-hl.window_rule = { match = { class = "^()$", title = "^(Save File)$" }, float = true }
-hl.window_rule = { match = { class = "^()$", title = "^(Open File)$" }, float = true }
-hl.window_rule = { match = { class = "^(LibreWolf)$", title = "^(Picture-in-Picture)$" }, float = true }
-hl.window_rule = { match = { class = "^(blueman-manager)$" }, float = true }
-hl.window_rule = {
+hl.window_rule({ match = { class = "^(org.pulseaudio.pavucontrol)" }, float = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Picture in picture)$" }, float = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Save File)$" }, float = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Open File)$" }, float = true })
+hl.window_rule({ match = { class = "^(LibreWolf)$", title = "^(Picture-in-Picture)$" }, float = true })
+hl.window_rule({ match = { class = "^(blueman-manager)$" }, float = true })
+hl.window_rule({
 	match = { class = "^(xdg-desktop-portal-gtk|xdg-desktop-portal-kde|xdg-desktop-portal-hyprland)(.*)$" },
 	float = true,
-}
-hl.window_rule = {
+})
+hl.window_rule({
 	match = {
 		class = "^(polkit-gnome-authentication-agent-1|hyprpolkitagent|org.org.kde.polkit-kde-authentication-agent-1)(.*)$",
 	},
 	float = true,
-}
-hl.window_rule = { match = { class = "^(CachyOSHello)$" }, float = true }
-hl.window_rule = { match = { class = "^(zenity)$" }, float = true }
-hl.window_rule = { match = { class = "^()$", title = "^(Steam - Self Updater)$" }, float = true }
+})
+hl.window_rule({ match = { class = "^(CachyOSHello)$" }, float = true })
+hl.window_rule({ match = { class = "^(zenity)$" }, float = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Steam - Self Updater)$" }, float = true })
 -- Increase the opacity
 -- windowrule = opacity 0.92, match = { class = "^(thunar|nemo)$" }
 -- windowrule = opacity 0.96, match = { class = "^(discord|armcord|webcord)$" }
@@ -72,8 +72,8 @@ hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 -- Layers Rules End #
 
 -- Custom Rules
-hl.window_rule = { match = { class = "discord" }, workspace = 1 }
-hl.window_rule = { match = { class = "Slack" }, workspace = 7 }
-hl.window_rule = { match = { class = "Google-chrome" }, workspace = 8 }
-hl.window_rule = { match = { class = "com.libretro.RetroArch" }, workspace = 2, fullscreen = true }
-hl.window_rule = { match = { class = "it.mijorus.smile" }, float = true }
+hl.window_rule({ match = { class = "discord" }, workspace = "1" })
+hl.window_rule({ match = { class = "Slack" }, workspace = "7" })
+hl.window_rule({ match = { class = "Google-chrome" }, workspace = "8" })
+hl.window_rule({ match = { class = "com.libretro.RetroArch" }, workspace = "2", fullscreen = true })
+hl.window_rule({ match = { class = "it.mijorus.smile" }, float = true })
