@@ -1,0 +1,140 @@
+syntax enable
+
+set shiftwidth=4
+set noexpandtab
+set smarttab
+set tabstop=4
+set softtabstop=4
+set shiftround
+set autoindent
+set smartindent
+
+set shortmess-=S
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+set hidden
+set autoread
+
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set nogdefault
+
+set backspace=indent,eol,start
+
+set number
+set relativenumber
+set numberwidth=4
+
+set wildmenu
+
+set virtualedit=block
+
+if &term =~ '^xterm\|rxvt'
+    " solid underscore
+    let &t_SI .= "\<Esc>[4 q"
+    " solid block
+    let &t_EI .= "\<Esc>[2 q"
+    " 1 or 0 -> blinking block
+    " 3 -> blinking underscore
+    " Recent versions of xterm (282 or above) also support
+    " 5 -> blinking vertical bar
+    " 6 -> solid vertical bar
+endif
+if &term =~ "xterm"
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
+endif
+
+let mapleader = " "
+
+autocmd BufWritePre * LspFormat
+
+nnoremap <silent> j :m .+1<Return>
+nnoremap <silent> k :m .-2<Return>
+" vnoremap <silent> j :m .+1<Return>
+" vnoremap <silent> k :m .-2<Return>
+
+noremap <silent> <leader>ca :LspCodeAction<Return>
+noremap <silent> <leader>cr :LspRename<Return>
+noremap <silent> <leader>cd :LspDiag current<Return>
+noremap <silent> <leader>f :LspFormat<Return>
+noremap <silent> K :LspHover<Return>
+noremap <silent> gd :LspGotoDefinition<Return>
+
+noremap <silent> [w :LspDiag prevWrap<Return>
+noremap <silent> ]w :LspDiag nextWrap<Return>
+noremap <silent> <leader>sg :RG<Return>
+noremap <silent> <C-p> :GFiles<Return>
+
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <silent> <leader>- :split<Return>
+noremap <silent> <leader>\ :vsplit<Return>
+noremap <silent> H :bN<Return>
+noremap <silent> L :bn<Return>
+
+noremap j gj
+noremap k gk
+
+set listchars=tab:>\ ,trail:·,extends:>,precedes:<,nbsp:+
+set list
+
+call plug#begin()
+
+Plug 'yegappan/lsp'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'rose-pine/vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-commentary'
+Plug 'voldikss/vim-floaterm'
+
+call plug#end()
+
+colorscheme rosepine
+
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><Return> pumvisible() ? "\<C-y>" : "\<Return>"
+
+noremap <silent> <leader>g :FloatermNew --height=0.9 --width=0.9 lazygit<Return>
+
+autocmd User LspSetup call LspOptionsSet(#{noNewlineInCompletion: v:true})
+
+let lspServers = [#{
+\	name: 'tsserver',
+\	filetype: ['javascript', 'typescript', 'typescriptreact', 'javascriptreact'],
+\	path: 'typescript-language-server',
+\	args: ['--stdio']
+\	},
+\	#{name: 'emmet',
+\	filetype: ['html', 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'text', 'markdown'],
+\	path: 'emmet-language-server',
+\	args: ['--stdio'],
+\	},
+\	#{name: 'vimls',
+\	filetype: 'vim',
+\	path: 'vim-language-server',
+\	args: ['--stdio'],
+\	},
+\	#{name: 'rustanalyzer',
+\	filetype: 'rust',
+\	path: 'rust-analyzer',
+\	args: [],
+\	syncInit: v:true
+\	},
+\	#{name: 'tailwindcss',
+\	filetype: ['javascript', 'typescript', 'html', 'typescriptreact', 'javascriptreact'],
+\	path: 'tailwindcss-language-server',
+\	args: ['--stdio'],
+\	syncInit: v:true
+\	}]
+autocmd User LspSetup call LspAddServer(lspServers)
