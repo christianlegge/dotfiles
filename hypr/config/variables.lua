@@ -60,6 +60,7 @@ hl.config({
 		focus_on_activate = true,
 		vrr = 2,
 		middle_click_paste = false,
+		initial_workspace_tracking = 0,
 	},
 
 	-- https://wiki.hyprland.org/Configuring/Variables/#render

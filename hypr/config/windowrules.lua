@@ -2,24 +2,29 @@
 -- ┃                    Windowrules Configuration                ┃
 -- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+require("config.colors")
+hl.window_rule({ match = { float = true }, pin = true })
+
 -- Windows Rules https://wiki.hyprland.org/Configuring/Window-Rules/ #
 
 -- Float Necessary Windows
 hl.window_rule({ match = { class = "^(org.pulseaudio.pavucontrol)" }, float = true })
-hl.window_rule({ match = { class = "^()$", title = "^(Picture in picture)$" }, float = true })
-hl.window_rule({ match = { class = "^()$", title = "^(Save File)$" }, float = true })
-hl.window_rule({ match = { class = "^()$", title = "^(Open File)$" }, float = true })
-hl.window_rule({ match = { class = "^(LibreWolf)$", title = "^(Picture-in-Picture)$" }, float = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Picture in picture)$" }, float = true, pin = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Save File)$" }, float = true, pin = true })
+hl.window_rule({ match = { class = "^()$", title = "^(Open File)$" }, float = true, pin = true })
+hl.window_rule({ match = { class = "^(LibreWolf)$", title = "^(Picture-in-Picture)$" }, float = true, pin = true })
 hl.window_rule({ match = { class = "^(blueman-manager)$" }, float = true })
 hl.window_rule({
 	match = { class = "^(xdg-desktop-portal-gtk|xdg-desktop-portal-kde|xdg-desktop-portal-hyprland)(.*)$" },
 	float = true,
+	pin = true,
 })
 hl.window_rule({
 	match = {
 		class = "^(polkit-gnome-authentication-agent-1|hyprpolkitagent|org.org.kde.polkit-kde-authentication-agent-1)(.*)$",
 	},
 	float = true,
+	pin = true,
 })
 hl.window_rule({ match = { class = "^(CachyOSHello)$" }, float = true })
 hl.window_rule({ match = { class = "^(zenity)$" }, float = true })
@@ -51,7 +56,7 @@ hl.window_rule({ match = { class = "^()$", title = "^(Steam - Self Updater)$" },
 -- workspace = special:scratchpad, on-created-empty:$applauncher
 -- no_gaps_when_only deprecated instead workspaces rules with selectors can do the same
 -- Smart gaps from 0.45.0 https://wiki.hyprland.org/Configuring/Workspace-Rules/#smart-gaps
-hl.workspace_rule({ workspace = "w[tv1-10]", gaps_out = 5, gaps_in = 3 })
+hl.workspace_rule({ workspace = "w[tv1-9]", gaps_out = 5, gaps_in = 3 })
 hl.workspace_rule({ workspace = "f[1]", gaps_out = 5, gaps_in = 3 })
 hl.workspace_rule({ workspace = "1", monitor = "DP-2", default = true })
 hl.workspace_rule({ workspace = "2", monitor = "DP-3", default = true })
@@ -72,8 +77,15 @@ hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 -- Layers Rules End #
 
 -- Custom Rules
-hl.window_rule({ match = { class = "discord" }, workspace = "1" })
-hl.window_rule({ match = { class = "Slack" }, workspace = "7" })
+hl.window_rule({ match = { class = "discord" }, workspace = "1", suppress_event = "maximize" })
+hl.window_rule({ match = { class = "slack" }, workspace = "7" })
 hl.window_rule({ match = { class = "Google-chrome" }, workspace = "8" })
 hl.window_rule({ match = { class = "com.libretro.RetroArch" }, workspace = "2", fullscreen = true })
 hl.window_rule({ match = { class = "it.mijorus.smile" }, float = true })
+
+hl.window_rule({ match = { pin = true }, border_color = GOLD, border_size = 4 })
+
+hl.window_rule({ match = { class = "^waterfox$" }, suppress_event = "activate activatefocus" })
+
+hl.window_rule({ match = { modal = true }, float = true, pin = true })
+hl.window_rule({ match = { class = "hyprland-share-picker" }, float = true, pin = true })

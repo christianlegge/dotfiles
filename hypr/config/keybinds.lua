@@ -7,7 +7,7 @@ hl.bind(
 )
 hl.bind("SUPER + S", hl.dsp.exec_cmd("wlogout"), { description = "Open power menu" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd(FILEMANAGER), { description = "Opens your preferred filemanager (FILEMANAGER)" })
-hl.bind("SUPER + Q", hl.dsp.window.kill(), { description = "Closes (not kill) current window" })
+hl.bind("SUPER + Q", hl.dsp.window.close(), { description = "Closes (not kill) current window" })
 -- hl.bind($mainMod SHIFT, M, Exits Hyprland by terminating the user sessions, hl.dsp.exec_cmd("loginctl terminate-user """))
 hl.bind(
 	"SUPER + V",
@@ -25,7 +25,11 @@ hl.bind(
 	{ description = "Toggles current window maximize" }
 )
 hl.bind("SUPER + Y", hl.dsp.window.pin(), { description = "Pin current window (shows on all workspaces)" })
-hl.bind("SUPER + J", hl.dsp.layout("togglesplit"), { description = "Toggles current window split mode" })
+hl.bind(
+	"SUPER + J",
+	hl.dsp.layout("togglesplit"),
+	{ description = "Toggles current window split mode", repeating = true }
+)
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { description = "Cycle open windows" })
 
 hl.bind(
@@ -187,7 +191,7 @@ end)
 hl.bind("SUPER + 2", function()
 	hl.dispatch(hl.dsp.focus({ workspace = "4" }))
 	hl.dispatch(hl.dsp.focus({ workspace = "5" }))
-	hl.dispatch(hl.dsp.focus({ workspace = "3" }))
+	hl.dispatch(hl.dsp.focus({ workspace = "6" }))
 end)
 
 hl.bind("SUPER + 3", function()
@@ -196,7 +200,21 @@ hl.bind("SUPER + 3", function()
 	hl.dispatch(hl.dsp.focus({ workspace = "9" }))
 end)
 
-hl.bind("SUPER + 0", hl.dsp.focus({ workspace = "10" }))
+hl.bind("SUPER + 4", function()
+	hl.dispatch(hl.dsp.focus({ workspace = "1" }))
+	hl.dispatch(hl.dsp.focus({ workspace = "2" }))
+end)
+
+hl.bind("SUPER + 5", function()
+	hl.dispatch(hl.dsp.focus({ workspace = "4" }))
+	hl.dispatch(hl.dsp.focus({ workspace = "5" }))
+end)
+
+hl.bind("SUPER + 6", function()
+	hl.dispatch(hl.dsp.focus({ workspace = "7" }))
+	hl.dispatch(hl.dsp.focus({ workspace = "8" }))
+end)
+-- hl.bind("SUPER + 0", hl.dsp.focus({ workspace = "10" }))
 
 -- Scroll through existing workspaces with mainMod + , or .
 -- hl.bind("SUPER + PERIOD", workspace, e+1, { description = "Scroll through workspaces incrementally"})
