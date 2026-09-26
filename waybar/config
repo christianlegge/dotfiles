@@ -201,7 +201,7 @@
         "format-alt": "{alt}: {}",
         "format-alt-click": "click-right",
         "interval": 3600,
-        "exec": "curl -s 'https://wttr.in/?format=1'",
+        "exec": "curl -s 'https://wttr.in/?format=1' | sed 's/+//'",
         //"return-type": "json",
         //"exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
