@@ -78,7 +78,16 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			"L3MON4D3/LuaSnip",
+			{
+				"L3MON4D3/LuaSnip",
+				version = "v2.*",
+				dependencies = {
+					{
+						"mlaursen/vim-react-snippets",
+						opts = {},
+					},
+				},
+			},
 			"saadparwaiz1/cmp_luasnip",
 
 			-- Adds LSP completion capabilities
@@ -746,11 +755,11 @@ vim.api.nvim_create_autocmd("FileType", {
 -- See `:help cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 local has_words_before = function()
-	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-		return false
-	end
+	-- if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+	-- 	return false
+	-- end
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0
 		and vim.api
@@ -758,9 +767,9 @@ local has_words_before = function()
 				:match("^%s*$")
 			== nil
 end
-luasnip.config.setup({
-	build = "make install_jsregexp",
-})
+-- luasnip.config.setup({
+-- 	build = "make install_jsregexp",
+-- })
 
 ---@diagnostic disable-next-line missing-fields
 cmp.setup({
