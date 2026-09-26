@@ -21,7 +21,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gammastep")
 	hl.exec_cmd("if [ $(date +%u) -le 5 ]; then gtk-launch slack; fi")
 	hl.exec_cmd("if [ $(date +%u) -le 5 ]; then gtk-launch google-chrome; fi")
-	hl.exec_cmd("gtk-launch discord")
+	hl.exec_cmd("gtk-launch vesktop")
 
 	-- Slow app launch fix
 	hl.exec_cmd("systemctl --user import-environment")

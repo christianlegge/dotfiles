@@ -78,6 +78,7 @@ hl.layer_rule({ match = { namespace = "wallpaper" }, animation = "fade 50%" })
 
 -- Custom Rules
 hl.window_rule({ match = { class = "discord" }, workspace = "1", suppress_event = "maximize" })
+hl.window_rule({ match = { class = "vesktop" }, workspace = "1", suppress_event = "maximize" })
 hl.window_rule({ match = { class = "slack" }, workspace = "7" })
 hl.window_rule({ match = { class = "Google-chrome" }, workspace = "8" })
 hl.window_rule({ match = { class = "com.libretro.RetroArch" }, workspace = "2", fullscreen = true })
