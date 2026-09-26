@@ -104,6 +104,7 @@ alias vim=nvim
 alias lg=lazygit
 alias mv='mv -i'
 alias sudo='sudo '
+alias us='du -sh *(D) | sort -h'
 vc() { vim $XDG_CONFIG_HOME/nvim -c "cd $XDG_CONFIG_HOME/nvim"; }
 
 tmuxdefault() {
@@ -158,6 +159,11 @@ fpath=(~/.zfunc $fpath)
 autoload -Uz compinit && compinit
 
 alias ll='ls -ahlF'
+
+autoload -Uz run-help
+(( ${+aliases[run-help]} )) && unalias run-help
+alias help=run-help
+autoload -Uz run-help-git run-help-ip run-help-openssl run-help-p4 run-help-sudo run-help-svk run-help-svn
 
 export WECHALLUSER="scatter"
 export WECHALLTOKEN="REDACTED"
