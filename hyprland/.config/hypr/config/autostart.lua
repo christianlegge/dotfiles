@@ -23,6 +23,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("if [ $(date +%u) -le 5 ]; then gtk-launch google-chrome; fi")
 	hl.exec_cmd("gtk-launch vesktop")
 	hl.exec_cmd("gtk-launch obsidian")
+	hl.exec_cmd("gtk-launch spotify-launcher")
+	hl.exec_cmd("gtk-launch pocket-casts-linux")
 
 	-- Slow app launch fix
 	hl.exec_cmd("systemctl --user import-environment")

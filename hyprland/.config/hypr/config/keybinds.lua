@@ -7,12 +7,30 @@ function notify(str)
 	-- notif.resume()
 end
 
+function toggleVisible(winclass, launch)
+	local currentWorkspace = hl.get_active_workspace()
+	local win = hl.get_windows({ class = winclass })[1]
+	if win == nil then
+		hl.exec_cmd(string.format("gtk-launch %s", launch))
+		notify(string.format("Launching %s", launch))
+	elseif win.workspace.name ~= "special:limbo" then
+		hl.dispatch(hl.dsp.window.float({ action = "disable", window = win }))
+		hl.dispatch(hl.dsp.window.fullscreen({ action = "unset", window = win }))
+		hl.dispatch(hl.dsp.window.move({ workspace = "special:limbo", window = win, follow = false }))
+	else
+		-- hl.dispatch(hl.dsp.window.float({ action = "enable", window = win }))
+		hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = win }))
+		hl.dispatch(hl.dsp.window.move({ workspace = currentWorkspace, window = win }))
+		-- notify(tostring(win.floating))
+	end
+end
+
 hl.bind(
 	"SUPER + RETURN",
 	hl.dsp.exec_cmd(TERMINAL),
 	{ description = "Opens your preferred terminal emulator (TERMINAL)" }
 )
-hl.bind("SUPER + S", hl.dsp.exec_cmd("wlogout"), { description = "Open power menu" })
+-- hl.bind("SUPER + S", hl.dsp.exec_cmd("wlogout"), { description = "Open power menu" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd(FILEMANAGER), { description = "Opens your preferred filemanager (FILEMANAGER)" })
 hl.bind("SUPER + Q", hl.dsp.window.close(), { description = "Closes (not kill) current window" })
 -- hl.bind($mainMod SHIFT, M, Exits Hyprland by terminating the user sessions, hl.dsp.exec_cmd("loginctl terminate-user """))
@@ -236,23 +254,9 @@ end)
 -- hl.bind("SUPER + F1", togglespecialworkspace, scratchpad, { description = "Call special workspace scratchpad"})
 -- hl.bind($mainMod ALT SHIFT, F1, Move active window to special workspace scratchpad, movetoworkspacesilent, special:scratchpad)
 
-hl.bind("SUPER + N", function()
-	local currentWorkspace = hl.get_active_workspace()
-	local obsidian = hl.get_windows({ class = "md.obsidian.Obsidian" })[1]
-	if obsidian == nil then
-		hl.exec_cmd("gtk-launch obsidian")
-		notify("Launching Obsidian")
-	elseif obsidian.workspace.id ~= 4 then
-		hl.dispatch(hl.dsp.window.float({ action = "disable", window = obsidian }))
-		hl.dispatch(hl.dsp.window.fullscreen({ action = "unset", window = obsidian }))
-		hl.dispatch(hl.dsp.window.move({ workspace = 4, window = obsidian, follow = false }))
-	else
-		-- hl.dispatch(hl.dsp.window.float({ action = "enable", window = obsidian }))
-		hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = obsidian }))
-		hl.dispatch(hl.dsp.window.move({ workspace = currentWorkspace, window = obsidian }))
-		-- notify(tostring(obsidian.floating))
-	end
-end)
+hl.bind("SUPER + N", function() toggleVisible("md.obsidian.Obsidian", "obsidian") end)
+hl.bind("SUPER + S", function() toggleVisible("Spotify", "spotify-launcher") end)
+hl.bind("SUPER + P", function() toggleVisible("pocket-casts-linux", "pocket-casts-linux") end)
 
 -- ======= Additional Settings =======
 
