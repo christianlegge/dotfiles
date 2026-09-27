@@ -8,7 +8,7 @@ if [ "$scheduled" = 0 ]; then
 	exit
 fi
 
-users=$(curl --no-progress-meter -H Authorization:\ MediaBrowser\ Token=REDACTED http://127.0.0.1:8096/Sessions | jq | grep -o 'NowPlayingItem' | wc -l)
+users=$(curl --no-progress-meter -H Authorization:\ MediaBrowser\ Token="$JELLYFIN_API_TOKEN" http://127.0.0.1:8096/Sessions | jq | grep -o 'NowPlayingItem' | wc -l)
 
 class=default
 if [ "$users" != 0 ]; then
