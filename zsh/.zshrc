@@ -100,7 +100,10 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
-alias vim=nvim
+alias vim=evi
+alias v=evi
+# alias vim=nvim
+# alias v=nvim
 alias lg=lazygit
 alias mv='mv -i'
 alias sudo='sudo '
@@ -120,7 +123,6 @@ tmuxdefault() {
 	tmux -2 attach-session -d
 	tmux source-file ~/.tmux.conf
 }
-
 if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
     exec tmuxdefault >/dev/null 2>&1
 	tmux source-file ~/.tmux.conf
