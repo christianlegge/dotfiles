@@ -341,7 +341,7 @@ main() {
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
     # TEST: This needs to be tested further
     if [[ "$bar_bg_disable" == "on" ]]; then
-        set status-style "fg=$thm_pine,bg=$bar_bg_disabled_color_option"
+        set status-style "fg=$thm_pine,bg=$thm_base"
         show_window_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#W"
         show_window_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#W"
         show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
