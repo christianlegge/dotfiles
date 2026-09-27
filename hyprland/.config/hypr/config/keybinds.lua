@@ -1,5 +1,12 @@
 require("config.defaults")
 
+function notify(str)
+	local notif = hl.notification.create({ text = str, duration = 5000 })
+	-- notif.set_text(str)
+	-- notif.set_timeout(5000)
+	-- notif.resume()
+end
+
 hl.bind(
 	"SUPER + RETURN",
 	hl.dsp.exec_cmd(TERMINAL),
@@ -228,6 +235,24 @@ end)
 -- hl.bind("SUPER + equal", togglespecialworkspace, special, { description = "Toggles the Special workspace"})
 -- hl.bind("SUPER + F1", togglespecialworkspace, scratchpad, { description = "Call special workspace scratchpad"})
 -- hl.bind($mainMod ALT SHIFT, F1, Move active window to special workspace scratchpad, movetoworkspacesilent, special:scratchpad)
+
+hl.bind("SUPER + N", function()
+	local currentWorkspace = hl.get_active_workspace()
+	local obsidian = hl.get_windows({ class = "md.obsidian.Obsidian" })[1]
+	if obsidian == nil then
+		hl.exec_cmd("gtk-launch obsidian")
+		notify("Launching Obsidian")
+	elseif obsidian.workspace.id ~= 4 then
+		hl.dispatch(hl.dsp.window.float({ action = "disable", window = obsidian }))
+		hl.dispatch(hl.dsp.window.fullscreen({ action = "unset", window = obsidian }))
+		hl.dispatch(hl.dsp.window.move({ workspace = 4, window = obsidian, follow = false }))
+	else
+		-- hl.dispatch(hl.dsp.window.float({ action = "enable", window = obsidian }))
+		hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = obsidian }))
+		hl.dispatch(hl.dsp.window.move({ workspace = currentWorkspace, window = obsidian }))
+		-- notify(tostring(obsidian.floating))
+	end
+end)
 
 -- ======= Additional Settings =======
 
