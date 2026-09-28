@@ -11,7 +11,7 @@ hl.animation({
 
 hl.animation({
 	leaf = "windowsMove",
-	enabled = true,
+	enabled = false,
 	speed = 2,
 	spring = "spring",
 })
