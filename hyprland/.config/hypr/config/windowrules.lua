@@ -67,6 +67,7 @@ hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-2" })
 hl.workspace_rule({ workspace = "7", monitor = "DP-2" })
 hl.workspace_rule({ workspace = "8", monitor = "DP-3" })
 hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-2" })
+hl.workspace_rule({ workspace = "special:limbo", animation = "fade 50%" })
 -- Workspaces Rules End #
 
 -- Layers Rules #
