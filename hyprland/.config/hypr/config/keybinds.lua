@@ -57,15 +57,22 @@ hl.bind(
 )
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { description = "Cycle open windows" })
 
+local satty_cmd = "satty --filename - --actions-on-enter save-to-clipboard --actions-on-enter exit --actions-on-escape exit --output-filename /home/christian/Pictures/screenshots/$(date +%F_%T).png --save-after-copy"
+
 hl.bind(
 	"Print",
-	hl.dsp.exec_cmd("hyprshot -z -m region -o /home/christian/Pictures/screenshots/"),
+	hl.dsp.exec_cmd(string.format("grimblast --freeze save area - | %s", satty_cmd)),
 	{ description = "Creates a screenshot of an area" }
 )
 hl.bind(
 	"CTRL + Print",
-	hl.dsp.exec_cmd("hyprshot -m window -o /home/christian/Pictures/screenshots/"),
+	hl.dsp.exec_cmd(string.format("grimblast --freeze save active - | %s", satty_cmd)),
 	{ description = "Creates a screenshot of the active window" }
+)
+hl.bind(
+	"SHIFT + Print",
+	hl.dsp.exec_cmd(string.format("grimblast --freeze save screen - | %s", satty_cmd)),
+	{ description = "Creates a screenshot of the entire output" }
 )
 -- hl.bind(ALT, Print, Creates a screenshot of the active display, hl.dsp.exec_cmd("$shot-screen,"))
 hl.bind("SUPER + O", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"), { description = "Reload/restarts Waybar" })
