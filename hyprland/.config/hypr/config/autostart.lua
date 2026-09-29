@@ -27,6 +27,12 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gtk-launch obsidian")
 	hl.exec_cmd("gtk-launch spotify-launcher")
 	hl.exec_cmd("gtk-launch pocket-casts-linux")
+	hl.exec_cmd([[sleep 60 &&
+		hyprctl dispatch 'hl.dsp.focus({ workspace = "1" })' &&
+		hyprctl dispatch 'hl.dsp.focus({ workspace = "3" })' &&
+		hyprctl dispatch 'hl.dsp.focus({ workspace = "2" })' &&
+		gtk-launch firefox
+	]])
 
 	-- Slow app launch fix
 	hl.exec_cmd("systemctl --user import-environment")
