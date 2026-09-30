@@ -56,7 +56,7 @@ hl.bind(
 )
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { description = "Cycle open windows" })
 
-local satty_cmd = "satty --copy-command wl-copy --filename - --actions-on-enter save-to-clipboard --actions-on-enter save-to-file --actions-on-escape exit --output-filename /home/christian/Pictures/screenshots/$(date +%F_%T).png --early-exit all"
+local satty_cmd = "satty --initial-tool brush --copy-command wl-copy --filename - --actions-on-enter save-to-clipboard --actions-on-enter save-to-file --actions-on-escape exit --output-filename /home/christian/Pictures/screenshots/$(date +%F_%T).png --early-exit all"
 
 hl.bind(
 	"Print",
