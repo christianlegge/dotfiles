@@ -31,6 +31,7 @@ hl.on("hyprland.start", function()
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "1" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "3" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "2" })' &&
+		sleep 2 &&
 		gtk-launch firefox
 	]])
 
