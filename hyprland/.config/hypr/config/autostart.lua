@@ -27,7 +27,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gtk-launch obsidian")
 	hl.exec_cmd("gtk-launch spotify-launcher")
 	hl.exec_cmd("gtk-launch pocket-casts-linux")
-	hl.exec_cmd([[sleep 60 &&
+	hl.exec_cmd([[sleep 30 &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "1" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "3" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "2" })' &&
