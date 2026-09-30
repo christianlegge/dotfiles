@@ -263,7 +263,7 @@ end)
 hl.bind("SUPER + N", function() toggleVisible("md.obsidian.Obsidian", "obsidian") end)
 hl.bind("SUPER + S", function() toggleVisible("Spotify", "spotify-launcher") end)
 hl.bind("SUPER + P", function() toggleVisible("pocket-casts-linux", "pocket-casts-linux") end)
-hl.bind("SUPER + H", hl.dsp.workspace.toggle_special("limbo"), { description = "Minimize current window to tray"})
+hl.bind("SUPER + H", hl.dsp.workspace.toggle_special("limbo"), { description = "Show/hide limbo workspace"})
 
 -- ======= Additional Settings =======
 
