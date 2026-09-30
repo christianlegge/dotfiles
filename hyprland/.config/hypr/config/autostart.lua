@@ -19,6 +19,12 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd(
 	-- 	'bash -c "mkfifo /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob && tail -f /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob | wob & disown"'
 	-- )
+	-- Slow app launch fix
+	hl.exec_cmd("systemctl --user import-environment")
+	hl.exec_cmd("hash dbus-update-activation-environment 2>/dev/null")
+	hl.exec_cmd("dbus-update-activation-environment --systemd")
+	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+
 	hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
 	hl.exec_cmd("gammastep")
 	hl.exec_cmd("if [ $(date +%u) -le 5 ]; then gtk-launch slack; fi")
@@ -27,6 +33,11 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gtk-launch obsidian")
 	hl.exec_cmd("gtk-launch spotify-launcher")
 	hl.exec_cmd("gtk-launch pocket-casts-linux")
+
+
+	-- Idle configuration
+	hl.exec_cmd(IDLEHANDLER)
+
 	hl.exec_cmd([[sleep 30 &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "1" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "3" })' &&
@@ -34,13 +45,4 @@ hl.on("hyprland.start", function()
 		sleep 2 &&
 		gtk-launch firefox
 	]])
-
-	-- Slow app launch fix
-	hl.exec_cmd("systemctl --user import-environment")
-	hl.exec_cmd("hash dbus-update-activation-environment 2>/dev/null")
-	hl.exec_cmd("dbus-update-activation-environment --systemd")
-	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-
-	-- Idle configuration
-	hl.exec_cmd(IDLEHANDLER)
 end)
