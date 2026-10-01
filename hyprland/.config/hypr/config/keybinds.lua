@@ -266,7 +266,7 @@ hl.bind("SUPER + P", function() toggleVisible("pocket-casts-linux", "pocket-cast
 hl.bind("SUPER + H", hl.dsp.workspace.toggle_special("limbo"), { description = "Show/hide limbo workspace"})
 
 hl.bind("SUPER + K", function()
-	local ws = hl.get_active_special_workspace()
+	local ws = hl.get_workspace("special:limbo")
 	notify(ws.name)
 	notify(string.sub(ws.name, 9))
 	if ws ~= nil then
