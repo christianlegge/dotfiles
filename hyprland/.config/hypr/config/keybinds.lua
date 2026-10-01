@@ -265,13 +265,6 @@ hl.bind("SUPER + S", function() toggleVisible("Spotify", "spotify-launcher") end
 hl.bind("SUPER + P", function() toggleVisible("pocket-casts-linux", "pocket-casts-linux") end)
 hl.bind("SUPER + H", hl.dsp.workspace.toggle_special("limbo"), { description = "Show/hide limbo workspace"})
 
-hl.bind("SUPER + K", function()
-	local ws = hl.get_workspace("special:limbo")
-	while ws.visible do
-		hl.dispatch(hl.dsp.workspace.toggle_special(string.sub(ws.name, 9)))
-	end
-end)
-
 -- ======= Additional Settings =======
 
 -- https://wiki.hyprland.org/Configuring/Binds

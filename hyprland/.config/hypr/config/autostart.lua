@@ -1,5 +1,12 @@
 require("config.defaults")
 
+function hideSpecial(name)
+	local ws = hl.get_workspace(string.format("special:%s", name))
+	while ws.visible do
+		hl.dispatch(hl.dsp.workspace.toggle_special(string.sub(ws.name, 9)))
+	end
+end
+
 hl.on("config.reloaded", function()
 	hl.notification.create({ text = "Hyprland lua config reloaded", timeout = 5000, icon = "ok" })
 end)
@@ -34,7 +41,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gtk-launch spotify-launcher")
 	hl.exec_cmd("gtk-launch pocket-casts-linux")
 
-
 	-- Idle configuration
 	hl.exec_cmd(IDLEHANDLER)
 
@@ -45,4 +51,6 @@ hl.on("hyprland.start", function()
 		sleep 2 &&
 		gtk-launch firefox
 	]])
+
+	hideSpecial("limbo")
 end)
