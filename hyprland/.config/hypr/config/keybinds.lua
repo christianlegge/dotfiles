@@ -267,8 +267,7 @@ hl.bind("SUPER + H", hl.dsp.workspace.toggle_special("limbo"), { description = "
 
 hl.bind("SUPER + K", function()
 	local ws = hl.get_workspace("special:limbo")
-	notify(ws.monitor)
-	if false and ws ~= nil then
+	while ws.visible do
 		hl.dispatch(hl.dsp.workspace.toggle_special(string.sub(ws.name, 9)))
 	end
 end)
