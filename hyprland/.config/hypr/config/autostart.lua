@@ -44,6 +44,8 @@ hl.on("hyprland.start", function()
 	-- Idle configuration
 	hl.exec_cmd(IDLEHANDLER)
 
+	hideSpecial("limbo")
+
 	hl.exec_cmd([[sleep 30 &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "1" })' &&
 		hyprctl dispatch 'hl.dsp.focus({ workspace = "3" })' &&
@@ -52,5 +54,4 @@ hl.on("hyprland.start", function()
 		gtk-launch firefox
 	]])
 
-	hideSpecial("limbo")
 end)
