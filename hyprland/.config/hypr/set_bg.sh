@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 while true; do
+	echo A
 	elev=$( heliocron -l 43.5789 -o -79.6583 poll --json | jq -r ".solar_elevation" )
 	night=$( echo "$elev < -6" | bc )
 	p=$( ps aux | grep "[s]waybg" )
