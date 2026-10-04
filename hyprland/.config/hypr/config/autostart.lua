@@ -13,6 +13,7 @@ end)
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("xmousepasteblock")
+	hl.exec_cmd("hypridle")
 	hl.exec_cmd("~/.config/hypr/set_bg.sh")
 	hl.exec_cmd("waybar_timer serve > /dev/null 2>@1")
 	-- hl.exec_cmd("gitwatch -s 60 -r origin /home/christian/Documents/Obsidian/Notes")
