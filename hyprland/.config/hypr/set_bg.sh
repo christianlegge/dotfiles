@@ -9,12 +9,18 @@ while true; do
 			continue
 		fi
 		killall swaybg; swaybg -o \* -i /home/christian/Pictures/daybg.jpg -m fill &
+		ddcutil setvcp 10 --display 1 50
+		ddcutil setvcp 10 --display 2 50
+		ddcutil setvcp 10 --display 3 50
 	else
 		echo "Night"
 		if echo $p | grep -q "nightbg"; then
 			continue
 		fi
 		killall swaybg; swaybg -o \* -i /home/christian/Pictures/nightbg.jpg -m fill &
+		ddcutil setvcp 10 --display 1 20
+		ddcutil setvcp 10 --display 2 20
+		ddcutil setvcp 10 --display 3 20
 	fi
 	sleep 300
 done
