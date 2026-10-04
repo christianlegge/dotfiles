@@ -23,5 +23,6 @@ while true; do
 		ddcutil setvcp 10 --display 2 20
 		ddcutil setvcp 10 --display 3 20
 	fi
+	echo B
 	sleep 300
 done
