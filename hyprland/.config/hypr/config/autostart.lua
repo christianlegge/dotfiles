@@ -2,6 +2,9 @@ require("config.defaults")
 
 function hideSpecial(name)
 	local ws = hl.get_workspace(string.format("special:%s", name))
+	if ws == nil then
+		return
+	end
 	while ws.visible do
 		hl.dispatch(hl.dsp.workspace.toggle_special(string.sub(ws.name, 9)))
 	end
