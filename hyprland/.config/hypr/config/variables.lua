@@ -66,6 +66,7 @@ hl.config({
 	-- https://wiki.hyprland.org/Configuring/Variables/#render
 	render = {
 		direct_scanout = true,
+		cm_auto_hdr = false,
 	},
 
 	-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
